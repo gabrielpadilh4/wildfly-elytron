@@ -1776,6 +1776,7 @@ function lunr_search(term) {
                 var link = documents[ref]['link'];
                 var body = documents[ref]['body'].substring(0,160)+'...';
                 var realUrl = link == '' ? url : link;
+                
                 document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + realUrl + "'><span class='title'>" + title + "</span><br /><span class='body'>"+ body +"</span><br /></a></li>";
             }
         } else {
