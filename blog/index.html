@@ -1301,17 +1301,30 @@
         return false;
     }
 
-    function mountResultHtml(terms) {
-
-        var term = terms.split(" ");
-
-        var termToSearch = "";
-
-        for (let index = 0; index < term.length; index++) {
-            termToSearch = term[index] + " +"
+    function getLunrSearchQuery(query) {
+        const searchTerms = query.split(" ");
+        if(searchTerms.length === 1) {
+            return query;
         }
 
-        var results = idx.search(termToSearch);
+        query = "";
+        
+        for(const term of searchTerms) {
+            query += `+${term}`
+        }
+
+        return query.trim();
+    }
+
+    function mountResultHtml(terms) {
+
+        const originalQuery = terms;
+
+        var query = getLunrSearchQuery(originalQuery);
+
+        var results = idx.search(query);
+
+        results = results.length ? results : query != originalQuery ? idx.search(originalQuery) : []
 
         if (results.length > 0) {
 
