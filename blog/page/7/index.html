@@ -1311,7 +1311,7 @@
         query = "";
         
         for(const term of searchTerms) {
-            query += `+${term}`
+            query += ` +${term}`
         }
 
         return query.trim();
